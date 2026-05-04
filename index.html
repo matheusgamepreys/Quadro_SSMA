@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Avisos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: #0f1117;
+      color: #fff;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    /* ── Cabeçalho ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 20px;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+    .relogio { text-align: right; }
+    .hora {
+      font-size: 42px;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+    .data-texto {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+      text-transform: capitalize;
+    }
+
+    /* ── Grid de avisos ── */
+    .avisos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .aviso-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .aviso-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .dot-info   { background: #4ea8ff; }
+    .dot-warn   { background: #f5a623; }
+    .dot-ok     { background: #4cd97b; }
+    .dot-danger { background: #f55c5c; }
+
+    .aviso-titulo {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .aviso-texto {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+    }
+    .aviso-tag {
+      display: inline-block;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 12px;
+      font-weight: 500;
+    }
+    .tag-info   { background: rgba(78,168,255,0.15); color: #4ea8ff; }
+    .tag-warn   { background: rgba(245,166,35,0.15);  color: #f5a623; }
+    .tag-ok     { background: rgba(76,217,123,0.15);  color: #4cd97b; }
+    .tag-danger { background: rgba(245,92,92,0.15);   color: #f55c5c; }
+
+    /* ── Rodapé rolante ── */
+    .ticker {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow: hidden;
+    }
+    .ticker-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #4ea8ff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      white-space: nowrap;
+    }
+    .ticker-track { overflow: hidden; flex: 1; }
+    .ticker-text {
+      white-space: nowrap;
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      display: inline-block;
+      animation: ticker 22s linear infinite;
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <!-- ✏️ MUDE O NOME DA SUA EMPRESA AQUI -->
+    <div class="logo">📢 Avisos da Empresa</div>
+    <div class="relogio">
+      <div class="hora" id="hora">--:--:--</div>
+      <div class="data-texto" id="data"></div>
+    </div>
+  </div>
+
+  <div class="avisos-grid">
+
+    <!-- ✏️ AVISO 1 — mude o título, texto e categoria -->
+    <div class="aviso-card">
+      <div class="aviso-dot dot-info"></div>
+      <div>
+        <div class="aviso-titulo">Reunião Geral — Sexta-feira</div>
+        <div class="aviso-texto">Reunião de equipe às 14h na sala principal. Presença obrigatória para todos os setores.</div>
+        <span class="aviso-tag tag-info">Informativo</span>
+      </div>
+    </div>
+
+    <!-- ✏️ AVISO 2 -->
+    <div class="aviso-card">
+      <div class="aviso-dot dot-warn"></div>
+      <div>
+        <div class="aviso-titulo">Manutenção do sistema</div>
+        <div class="aviso-texto">O sistema estará em manutenção neste sábado das 08h às 12h. Salve seus trabalhos antes de sair.</div>
+        <span class="aviso-tag tag-warn">Atenção</span>
+      </div>
+    </div>
+
+    <!-- ✏️ AVISO 3 -->
+    <div class="aviso-card">
+      <div class="aviso-dot dot-ok"></div>
+      <div>
+        <div class="aviso-titulo">Novo funcionário na equipe</div>
+        <div class="aviso-texto">Boas-vindas ao João Silva, que inicia hoje no setor de TI. Sejam todos muito bem-vindos!</div>
+        <span class="aviso-tag tag-ok">Novidade</span>
+      </div>
+    </div>
+
+    <!-- ✏️ AVISO 4 -->
+    <div class="aviso-card">
+      <div class="aviso-dot dot-danger"></div>
+      <div>
+        <div class="aviso-titulo">Prazo: relatório mensal</div>
+        <div class="aviso-texto">O prazo para entrega do relatório mensal é amanhã às 18h. Não deixe para a última hora.</div>
+        <span class="aviso-tag tag-danger">Urgente</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ✏️ RODAPÉ — edite os recados rápidos separados por &nbsp;&nbsp;&nbsp; -->
+  <div class="ticker">
+    <span class="ticker-label">Recados</span>
+    <div class="ticker-track">
+      <span class="ticker-text">
+        🔵 Cafeteria fechada na quinta-feira
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        🟡 Estacionamento bloco B interditado até sexta
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        🟢 Aniversário da empresa: confraternização no dia 20
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        🔴 RH: entrega de documentos de férias até o dia 10
+      </span>
+    </div>
+  </div>
+
+  <script>
+    function atualizarRelogio() {
+      const agora = new Date();
+      document.getElementById('hora').textContent =
+        agora.toLocaleTimeString('pt-BR');
+      document.getElementById('data').textContent =
+        agora.toLocaleDateString('pt-BR', {
+          weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
+        });
+    }
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 1000);
+  </script>
+
+</body>
+</html>
